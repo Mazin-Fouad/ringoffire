@@ -5,12 +5,21 @@
       [ngStyle]="{ 'right.px': i * 5 }"
       src="assets/playing_cards/card_cover.png"
     />
+
     <img
       (click)="takeCard()"
-      [class.pick-card]="pickCardAnimation"
-      class="top-cart"
+      class="top-card"
+      style="right: 25px"
       src="assets/playing_cards/card_cover.png"
-      style="right: 20px"
+    />
+
+    <img
+      (click)="takeCard()"
+      *ngIf="pickCardAnimation"
+      [class.pick-card]="pickCardAnimation"
+      class="pick-card"
+      style="right: 25px"
+      src="assets/playing_cards/ace_1.png"
     />
   </div>
 </div>
