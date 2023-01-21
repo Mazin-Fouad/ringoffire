@@ -1,0 +1,45 @@
+$background-start: #404040;
+$title-start: #eae7b1;
+$startbutton-bg: #61876e;
+$startbutton-hover: #820000;
+
+.start-screen {
+    background-color: $background-start;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        color: $title-start;
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    img {
+        width: 55vw;
+        height: 40vh;
+        object-fit: cover;
+    }
+
+    a {
+        margin-top: 10px;
+        background-color: $startbutton-bg;
+        color: #fff;
+        padding: 10px 20px;
+        font-weight: bold;
+        font-size: 2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: $startbutton-hover;
+            transform: scale(1.2);
+            transition: all 0.3s ease;
+        }
+    }
+}
