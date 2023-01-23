@@ -1,3 +1,5 @@
+<app-player style="top: 150px" class="player-position"></app-player>
+
 <div class="game-field">
   <div class="card-stack">
     <!-- Card Stack -->
@@ -24,7 +26,6 @@
 
     <!-- Current card (Animation) -->
     <img
-      (click)="takeCard()"
       *ngIf="pickCardAnimation"
       class="pick-card"
       style="right: 25px"
