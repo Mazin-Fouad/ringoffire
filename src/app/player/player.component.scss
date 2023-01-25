@@ -1,14 +1,17 @@
+$player-bg: #d6392e;
+
 .player {
     width: 300px;
     display: flex;
     align-items: center;
-    background-color: orangered;
+    background-color: $player-bg;
     padding: 10px 20px;
     border-radius: 50px 0 0 50px;
 
     span {
         font-size: 2rem;
         margin-left: 16px;
+        color: #fff;
     }
 
     img {
