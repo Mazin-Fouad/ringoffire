@@ -1,8 +1,10 @@
+$background-btn: #181c91;
+
 .game-field {
     width: 100vw;
     max-width: 100%;
     height: 100vh;
-    background-image: url("./../../assets/imgs/game-bg.jpg");
+    background-image: url("./../../assets/imgs/wood-background.jpg");
     background-position: center;
     background-size: cover;
     display: flex;
@@ -63,4 +65,13 @@
     position: absolute;
     bottom: 5%;
     right: 5%;
+    background-color: $background-btn;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    .btn-icon {
+        color: #fff;
+    }
 }

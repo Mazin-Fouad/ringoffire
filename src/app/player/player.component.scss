@@ -1,7 +1,8 @@
-$player-bg: #d6392e;
+$player-active-bg: #5d1583;
+$player-bg: #f66d3b;
 
 .player {
-    width: 200px;
+    width: 140px;
     display: flex;
     align-items: center;
     background-color: $player-bg;
@@ -10,17 +11,21 @@ $player-bg: #d6392e;
     transition: all 225ms ease-in-out;
 
     &:hover {
-        width: 250px;
+        width: 180px;
     }
 
     span {
-        font-size: 2rem;
+        font-size: 1.2rem;
         margin-left: 16px;
         color: #fff;
     }
 
     img {
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
     }
+}
+
+.player-active {
+    background-color: $player-active-bg;
 }
