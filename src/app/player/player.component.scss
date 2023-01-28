@@ -1,5 +1,5 @@
-$player-active-bg: #5d1583;
 $player-bg: #f66d3b;
+$player-active-bg: #5d1583;
 
 .player {
     width: 140px;
@@ -28,4 +28,5 @@ $player-bg: #f66d3b;
 
 .player-active {
     background-color: $player-active-bg;
+    width: 180px;
 }
