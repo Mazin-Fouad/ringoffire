@@ -4,7 +4,7 @@ $startbutton-bg: #61876e;
 $startbutton-hover: #820000;
 
 .start-screen {
-    background-color: $background-start;
+    background-color: #000;
     width: 100vw;
     height: 100vh;
     max-width: 100%;
@@ -14,14 +14,18 @@ $startbutton-hover: #820000;
     align-items: center;
 
     h1 {
-        color: $title-start;
+        // color: $title-start;
         font-size: 3rem;
         text-align: center;
+        // font-family: “Open Sans”, sans-serif;
+        color: #f5f5f5;
+        text-shadow: 0px -2px 4px #fff, 0px -2px 10px #ff3, 0px -10px 20px #f90, 0px -20px 40px #c33;
+        font-size: 100px;
     }
 
     img {
-        width: 55vw;
-        height: 40vh;
+        width: 40vw;
+        height: auto;
         object-fit: cover;
     }
 
