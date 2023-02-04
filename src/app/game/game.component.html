@@ -4,6 +4,7 @@
   [name]="player"
   class="player-position"
   [ngStyle]="{ 'top.px': 100 + i * 70 }"
+  #playerRef
 ></app-player>
 
 <div class="game-field">
@@ -42,6 +43,6 @@
 
 <app-game-info [card]="currentCard" class="pinn-bottom"></app-game-info>
 
-<button mat-fab (click)="openDialog()" class="btn-add">
+<button mat-fab (click)="openDialog(); refresh()" class="btn-add">
   <mat-icon class="btn-icon">add</mat-icon>
 </button>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Game } from '../models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
@@ -23,30 +23,29 @@ export class GameComponent implements OnInit {
   game: Game;
   currentCard: string = '';
   item$: Observable<any>;
-  // games: Array<any>;
 
   constructor(
     private route: ActivatedRoute,
     private firestore: Firestore,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.newGame();
     this.route.params.subscribe((params) => {
-      console.log(params['id']);
-      let id = params['id'];
+      console.log(params);
+      const id = params['id'];
 
       const coll = collection(this.firestore, 'games');
       this.item$ = collectionData(coll, id);
 
-      this.item$.subscribe((newGame) => {
-        console.log('Game Updated', newGame);
-
-        this.game.currentPlayer = newGame.currentPlayer;
-        this.game.playedCards = newGame.playedCards;
-        this.game.players = newGame.players;
-        this.game.stack = newGame.stack;
+      this.item$.subscribe((game: any) => {
+        console.log('Game Updated', game);
+        this.game.currentPlayer = game.currentPlayer;
+        this.game.playedCards = game.playedCards;
+        this.game.players = game.players;
+        this.game.stack = game.stack;
       });
     });
   }
@@ -83,5 +82,9 @@ export class GameComponent implements OnInit {
         this.game.players.push(name);
       }
     });
+  }
+
+  refresh() {
+    this.cd.detectChanges();
   }
 }
