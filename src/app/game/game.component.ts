@@ -9,6 +9,7 @@ import {
   collectionData,
   CollectionReference,
   doc,
+  docData,
   DocumentData,
   DocumentReference,
   Firestore,
@@ -45,7 +46,8 @@ export class GameComponent implements OnInit {
       console.log('The ID is:', this.gameId);
 
       const coll = collection(this.firestore, 'games');
-      this.item$ = collectionData(coll, this.gameId);
+      const docRef = doc(coll, this.gameId);
+      this.item$ = docData(docRef);
 
       this.item$.subscribe((game: any) => {
         console.log('Game Updated', game);
@@ -60,7 +62,6 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game();
-    this.refresh();
   }
 
   takeCard() {
@@ -83,10 +84,13 @@ export class GameComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    dialogRef.afterClosed().subscribe((name: string) => {
+    dialogRef.afterClosed().subscribe(async (name: string) => {
       if (name && name.length > 0) {
         //if name exists and larger than 0, push name in the array
         this.game.players.push(name);
+        const coll = collection(this.firestore, 'games');
+        const docRef = doc(coll, this.gameId);
+        await updateDoc(docRef, { players: this.game.players });
       }
     });
   }
