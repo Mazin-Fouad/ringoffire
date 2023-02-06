@@ -14,36 +14,123 @@ $startbutton-hover: #820000;
     align-items: center;
 
     h1 {
-        // color: $title-start;
-        font-size: 3rem;
+        font-size: 4rem;
+        line-height: 4rem;
+        /*   text-shadow: 0 0 5px #f562ff, 0 0 15px #f562ff, 0 0 25px #f562ff,
+          0 0 20px #f562ff, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092;
+        color: #fccaff; */
+        text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000,
+            0 0 10px #ff8d00, 0 0 98px #ff0000;
+        color: #fff6a9;
+        font-family: "Sacramento", cursive;
         text-align: center;
-        // font-family: “Open Sans”, sans-serif;
-        color: #f5f5f5;
-        text-shadow: 0px -2px 4px #fff, 0px -2px 10px #ff3, 0px -10px 20px #f90, 0px -20px 40px #c33;
-        font-size: 100px;
+        animation: blink 12s infinite;
+        -webkit-animation: blink 12s infinite;
+    }
+
+    body {
+        padding: 2vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #222;
+        background-image: repeating-linear-gradient(
+            to bottom,
+            transparent 7px,
+            rgba(0, 0, 0, 0.8) 9px,
+            rgba(0, 0, 0, 0.8) 13px,
+            transparent 13px
+        );
+    }
+
+    @-webkit-keyframes blink {
+        20%,
+        24%,
+        55% {
+            color: #111;
+            text-shadow: none;
+        }
+
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+            /*     color: #fccaff;
+          text-shadow: 0 0 5px #f562ff, 0 0 15px #f562ff, 0 0 25px #f562ff,
+            0 0 20px #f562ff, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092; */
+            text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000,
+                0 0 10px #ff8d00, 0 0 98px #ff0000;
+            color: #fff6a9;
+        }
+    }
+
+    @keyframes blink {
+        20%,
+        24%,
+        55% {
+            color: #111;
+            text-shadow: none;
+        }
+
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+            /*     color: #fccaff;
+          text-shadow: 0 0 5px #f562ff, 0 0 15px #f562ff, 0 0 25px #f562ff,
+            0 0 20px #f562ff, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092; */
+            text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000,
+                0 0 10px #ff8d00, 0 0 98px #ff0000;
+            color: #fff6a9;
+        }
     }
 
     img {
-        width: 40vw;
+        width: 55%;
+        padding: 0 50px;
         height: auto;
         object-fit: cover;
     }
 
     a {
-        margin-top: 10px;
-        background-color: $startbutton-bg;
+        // margin-top: 10px;
+        // background-color: $startbutton-bg;
+        // color: #fff;
+        // padding: 10px 20px;
+        // font-weight: bold;
+        // font-size: 2rem;
+        // border-radius: 8px;
+        // cursor: pointer;
+        // transition: all 0.3s ease;
+        background-color: #ff5733;
+        border: none;
+        width: 6rem;
+        text-align: center;
+        border-radius: 5px;
         color: #fff;
         padding: 10px 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
         font-weight: bold;
-        font-size: 2rem;
-        border-radius: 8px;
+        box-shadow: 0px 0px 10px #ff5733;
+        transition: all 0.3s ease-in-out;
         cursor: pointer;
-        transition: all 0.3s ease;
 
         &:hover {
-            background-color: $startbutton-hover;
-            transform: scale(1.2);
-            transition: all 0.3s ease;
+            // background-color: $startbutton-hover;
+            // transform: scale(1.2);
+            // transition: all 0.3s ease;
+            transform: translateY(-3px);
+            box-shadow: 0px 10px 20px #ff5733;
         }
     }
 }

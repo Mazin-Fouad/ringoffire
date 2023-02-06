@@ -7,11 +7,16 @@ import {
   addDoc,
   collection,
   collectionData,
+  CollectionReference,
   doc,
+  DocumentData,
+  DocumentReference,
   Firestore,
   setDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { update } from '@angular/fire/database';
 
 @Component({
   selector: 'app-game',
@@ -23,38 +28,39 @@ export class GameComponent implements OnInit {
   game: Game;
   currentCard: string = '';
   item$: Observable<any>;
+  gameId: any;
 
   constructor(
-    private route: ActivatedRoute,
     private firestore: Firestore,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
-    private cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.newGame();
+
     this.route.params.subscribe((params) => {
-      console.log(params);
-      const id = params['id'];
+      this.gameId = params['id'];
+      console.log('The ID is:', this.gameId);
 
       const coll = collection(this.firestore, 'games');
-      this.item$ = collectionData(coll, id);
+      this.item$ = collectionData(coll, this.gameId);
 
       this.item$.subscribe((game: any) => {
         console.log('Game Updated', game);
         this.game.currentPlayer = game.currentPlayer;
-        this.game.playedCards = game.playedCards;
         this.game.players = game.players;
+        this.game.playedCards = game.playedCards;
         this.game.stack = game.stack;
+        this.refresh();
       });
     });
   }
 
   newGame() {
     this.game = new Game();
-    // const coll = collection(this.firestore, 'games');
-    // // setDoc(doc(coll), this.game.toJson());
-    // addDoc(coll, this.game.toJson());
+    this.refresh();
   }
 
   takeCard() {
@@ -69,6 +75,7 @@ export class GameComponent implements OnInit {
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
+        this.refresh();
       }, 1000);
     }
   }
