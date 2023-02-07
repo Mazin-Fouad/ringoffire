@@ -25,9 +25,7 @@ import { update } from '@angular/fire/database';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  pickCardAnimation = false;
   game: Game;
-  currentCard: string = '';
   item$: Observable<any>;
   gameId: any;
 
@@ -55,7 +53,8 @@ export class GameComponent implements OnInit {
         this.game.players = game.players;
         this.game.playedCards = game.playedCards;
         this.game.stack = game.stack;
-        this.refresh();
+        this.game.currentCard = game.currentCard;
+        this.game.pickCardAnimation = game.pickCardAnimation;
       });
     });
   }
@@ -65,18 +64,18 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (!this.pickCardAnimation) {
+    if (!this.game.pickCardAnimation) {
       // the function works only if pickCardAnimation= false
-      this.pickCardAnimation = true;
-      this.currentCard = this.game.stack.pop();
+      this.game.pickCardAnimation = true;
+      this.game.currentCard = this.game.stack.pop();
       this.game.currentPlayer++;
       this.game.currentPlayer =
         this.game.currentPlayer % this.game.players.length;
-
+      this.saveGame();
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAnimation = false;
-        this.refresh();
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.pickCardAnimation = false;
+        this.saveGame();
       }, 1000);
     }
   }
@@ -84,18 +83,25 @@ export class GameComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    dialogRef.afterClosed().subscribe(async (name: string) => {
+    dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         //if name exists and larger than 0, push name in the array
         this.game.players.push(name);
-        const coll = collection(this.firestore, 'games');
-        const docRef = doc(coll, this.gameId);
-        await updateDoc(docRef, { players: this.game.players });
+        // const coll = collection(this.firestore, 'games');
+        // const docRef = doc(coll, this.gameId);
+        // updateDoc(docRef, { players: this.game.players });
+        this.saveGame();
       }
     });
   }
 
-  refresh() {
-    this.cd.detectChanges();
+  saveGame() {
+    const coll = collection(this.firestore, 'games');
+    const docRef = doc(coll, this.gameId);
+    updateDoc(docRef, this.game.toJson());
   }
+
+  // refresh() {
+  //   this.cd.detectChanges();
+  // }
 }
