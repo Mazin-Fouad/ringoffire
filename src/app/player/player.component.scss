@@ -18,15 +18,18 @@ $player-active-bg: #5d1583;
         font-size: 1.2rem;
         margin-left: 16px;
         color: #fff;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     img {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
 }
 
 .player-active {
     background-color: $player-active-bg;
-    width: 180px;
+    width: 160px;
 }

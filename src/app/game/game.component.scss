@@ -120,3 +120,29 @@ app-player-mobile {
     background-color: #181c91;
     border-radius: 5px;
 }
+
+.icon-info {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffffd5;
+    letter-spacing: 2px;
+}
+
+app-player,
+app-player-mobile {
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(1.15);
+    }
+}
+
+.game-over-container {
+    background-color: #181c91;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

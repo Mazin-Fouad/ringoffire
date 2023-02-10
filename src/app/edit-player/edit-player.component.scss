@@ -1,0 +1,14 @@
+.profile-picture {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    padding: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 225ms ease-in-out;
+
+    &:hover {
+        filter: brightness(1.15);
+        transform: translateY(-10px);
+    }
+}

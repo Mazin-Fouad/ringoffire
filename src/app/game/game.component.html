@@ -2,19 +2,26 @@
   *ngFor="let player of game.players; let i = index"
   [playerActive]="i == game.currentPlayer"
   [name]="player"
+  [image]="game.player_images[i]"
   class="player-position hide-mobile"
   [ngStyle]="{ 'top.px': 100 + i * 70 }"
+  (click)="editPlayer(i)"
 ></app-player>
 
 <div class="scroll-container hide-desktop">
   <app-player-mobile
     *ngFor="let player of game.players; let i = index"
+    [image]="game.player_images[i]"
     [playerActive]="i == game.currentPlayer"
     [name]="player"
+    (click)="editPlayer(i)"
   ></app-player-mobile>
 </div>
 
-<div class="game-field">
+<div *ngIf="gameOver" class="game-over-container">
+  <img src="/assets/imgs/game-over.png" />
+</div>
+<div *ngIf="!gameOver" class="game-field">
   <div class="card-stack">
     <!-- Card Stack -->
     <img
@@ -48,8 +55,14 @@
   </div>
 </div>
 
-<app-game-info [card]="game.currentCard" class="pinn-bottom"></app-game-info>
+<app-game-info
+  *ngIf="!gameOver"
+  [card]="game.currentCard"
+  class="pinn-bottom"
+></app-game-info>
 
-<button mat-fab (click)="openDialog()" class="btn-add">
+<button *ngIf="!gameOver" mat-fab (click)="openDialog()" class="btn-add">
   <mat-icon class="btn-icon">add</mat-icon>
 </button>
+
+<span class="icon-info">Icons was made with Flaticon</span>

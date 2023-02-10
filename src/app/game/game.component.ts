@@ -16,8 +16,8 @@ import {
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
-import { update } from '@angular/fire/database';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -28,12 +28,14 @@ export class GameComponent implements OnInit {
   game: Game;
   item$: Observable<any>;
   gameId: any;
+  gameOver: Boolean = false;
 
   constructor(
     private firestore: Firestore,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class GameComponent implements OnInit {
         console.log('Game Updated', game);
         this.game.currentPlayer = game.currentPlayer;
         this.game.players = game.players;
+        this.game.player_images = game.player_images;
         this.game.playedCards = game.playedCards;
         this.game.stack = game.stack;
         this.game.currentCard = game.currentCard;
@@ -64,7 +67,9 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (!this.game.pickCardAnimation) {
+    if (this.game.stack.length === 0) {
+      this.resetGame();
+    } else if (!this.game.pickCardAnimation) {
       // the function works only if pickCardAnimation= false
       this.game.pickCardAnimation = true;
       this.game.currentCard = this.game.stack.pop();
@@ -80,6 +85,14 @@ export class GameComponent implements OnInit {
     }
   }
 
+  resetGame() {
+    this.gameOver = true;
+    setTimeout(() => {
+      this.gameOver = false;
+      this.router.navigateByUrl('/');
+    }, 4000);
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
@@ -87,9 +100,7 @@ export class GameComponent implements OnInit {
       if (name && name.length > 0) {
         //if name exists and larger than 0, push name in the array
         this.game.players.push(name);
-        // const coll = collection(this.firestore, 'games');
-        // const docRef = doc(coll, this.gameId);
-        // updateDoc(docRef, { players: this.game.players });
+        this.game.player_images.push('user.png');
         this.saveGame();
       }
     });
@@ -101,7 +112,20 @@ export class GameComponent implements OnInit {
     updateDoc(docRef, this.game.toJson());
   }
 
-  // refresh() {
-  //   this.cd.detectChanges();
-  // }
+  editPlayer(playerId: number) {
+    console.log('Edit Player', playerId);
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+    dialogRef.afterClosed().subscribe((change: string) => {
+      if (change) {
+        if (change === 'DELETE') {
+          this.game.players.splice(playerId, 1);
+          this.game.player_images.splice(playerId, 1);
+        } else {
+          console.log('Recieved Change', change);
+          this.game.player_images[playerId] = change;
+        }
+        this.saveGame();
+      }
+    });
+  }
 }
