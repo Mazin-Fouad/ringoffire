@@ -1,4 +1,8 @@
 .info-card-content {
     color: #fff;
     padding: 10px;
+
+    @media (max-width: 720px) {
+        min-height: 120px;
+    }
 }

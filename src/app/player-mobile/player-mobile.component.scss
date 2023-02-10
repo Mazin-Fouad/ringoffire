@@ -1,0 +1,33 @@
+$player-bg: #f66d3b;
+$player-active-bg: #5d1583;
+
+.player {
+    width: 80px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $player-bg;
+    border-radius: 0 0 50px 50px;
+    transition: all 225ms ease-in-out;
+
+    // &:hover {
+    //     width: 180px;
+    // }
+
+    span {
+        font-size: 1.2rem;
+        color: #fff;
+    }
+
+    img {
+        width: 30px;
+        height: 30px;
+        margin-top: 10px;
+    }
+}
+
+.player-active {
+    background-color: $player-active-bg;
+}

@@ -18,6 +18,12 @@ $background-btn: #181c91;
         position: absolute;
         width: 120px;
     }
+
+    @media (max-width: 720px) {
+        img {
+            width: 85px;
+        }
+    }
 }
 
 .top-card {
@@ -82,4 +88,35 @@ $background-btn: #181c91;
     bottom: 5%;
     left: 200px;
     right: 200px;
+
+    @media (max-width: 720px) {
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.scroll-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 5px;
+}
+
+app-player-mobile {
+    margin-left: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #181c91;
+    border-radius: 5px;
 }

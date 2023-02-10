@@ -97,20 +97,14 @@ $startbutton-hover: #820000;
     img {
         width: 55%;
         padding: 0 50px;
-        height: auto;
         object-fit: cover;
+
+        @media (max-width: 480px) {
+            height: 23%;
+        }
     }
 
     a {
-        // margin-top: 10px;
-        // background-color: $startbutton-bg;
-        // color: #fff;
-        // padding: 10px 20px;
-        // font-weight: bold;
-        // font-size: 2rem;
-        // border-radius: 8px;
-        // cursor: pointer;
-        // transition: all 0.3s ease;
         background-color: #ff5733;
         border: none;
         width: 6rem;
@@ -124,11 +118,9 @@ $startbutton-hover: #820000;
         box-shadow: 0px 0px 10px #ff5733;
         transition: all 0.3s ease-in-out;
         cursor: pointer;
+        letter-spacing: 5px;
 
         &:hover {
-            // background-color: $startbutton-hover;
-            // transform: scale(1.2);
-            // transition: all 0.3s ease;
             transform: translateY(-3px);
             box-shadow: 0px 10px 20px #ff5733;
         }
